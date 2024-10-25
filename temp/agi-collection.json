@@ -1,0 +1,214 @@
+{
+    "_type": "export",
+    "__export_format": 4,
+    "__export_date": "2024-08-05T19:03:34.647Z",
+    "__export_source": "insomnia.desktop.app:v9.3.3",
+    "resources": [
+        {
+            "_id": "req_a03f268b108049eba44de99466860435",
+            "parentId": "wrk_11af486746e944c1a421c832dffcc728",
+            "modified": 1686254557157,
+            "created": 1685565203007,
+            "url": "https://cognito-idp.us-east-1.amazonaws.com/oauth2/token",
+            "name": "Auth",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"AuthFlow\": \"USER_PASSWORD_AUTH\",\n\t\"ClientId\": \"{{ _.cognito_client_id }}\",\n\t\"AuthParameters\": {\n\t\t\"USERNAME\": \"{{ _.cognito_test_account }}\",\n\t\t\"PASSWORD\": \"{{ _.cognito_test_account_pwd }}\"\n\t}\n}"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/x-amz-json-1.1",
+                    "id": "pair_32fb4402a7e04926b637ed9b3e2e2c33"
+                },
+                {
+                    "id": "pair_f73ccbab11ff41fab7de0f554538a266",
+                    "name": "X-Amz-Target",
+                    "value": "AWSCognitoIdentityProviderService.InitiateAuth",
+                    "description": ""
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1685565203007,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "wrk_11af486746e944c1a421c832dffcc728",
+            "parentId": null,
+            "modified": 1722883620649,
+            "created": 1722883620649,
+            "name": "AGI Sales",
+            "description": "",
+            "scope": "collection",
+            "_type": "workspace"
+        },
+        {
+            "_id": "req_c0233e80a24543348d152292afab0e08",
+            "parentId": "wrk_11af486746e944c1a421c832dffcc728",
+            "modified": 1722884237371,
+            "created": 1685560871235,
+            "url": "{{ _.api_url }}",
+            "name": "SubmitSales",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/graphql",
+                "text": "{\"query\":\"mutation submitSales(\\n    $startDate: AWSDate!\\n    $franchiseId: String!\\n    $days: Int!\\n    $datapoints: [SalesDatapoint!]!\\n  ) {\\n    submitSales(\\n      input: {\\n        startDate: $startDate\\n        franchiseId: $franchiseId\\n        days: $days\\n        datapoints: $datapoints\\n      }\\n    ) {\\n      status\\n      errors {\\n        reasons\\n        id\\n      }\\n    }\\n  }\",\"operationName\":\"submitSales\",\"variables\":\"{\\n\\t\\\"startDate\\\": \\\"2024-08-05\\\",\\n\\t\\\"franchiseId\\\": \\\"1234\\\",\\n\\t\\\"days\\\": 2,\\n\\t\\\"datapoints\\\": [\\n\\t\\t{\\n\\t\\t\\t\\\"storeId\\\": \\\"1234\\\",\\n  \\\"date\\\": \\\"2024-08-05\\\",\\n\\t\\t\\t\\\"salesAmount\\\": 1,\\n\\t\\t\\t\\\"currency\\\": \\\"USD\\\"\\n\\t\\t}\\n\\t]\\n}\"}"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "id": "pair_e7df2cc76d3b46feb8e6d110588bb6ca"
+                },
+                {
+                    "id": "pair_e7de7b5148c64616966488ab37e7de81",
+                    "name": "Authorization",
+                    "value": "{{ _.cognito_token }}",
+                    "description": ""
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1685560871235,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_b34aa63fd2b840f182ad5d69f5ae8247",
+            "parentId": "wrk_11af486746e944c1a421c832dffcc728",
+            "modified": 1722884529045,
+            "created": 1722884261644,
+            "url": "{{ _.api_url }}",
+            "name": "SubmitPPR",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/graphql",
+                "text": "{\"query\":\"mutation submitPPR(\\n    $startDate: AWSDate!\\n    $datapoints: [PPRDatapoint!]!\\n  ) {\\n    submitPPR(\\n      input: {\\n        startDate: $startDate\\n        datapoints: $datapoints\\n      }\\n    ) {\\n      status\\n      errors {\\n        reasons\\n        id\\n      }\\n    }\\n  }\",\"operationName\":\"submitPPR\",\"variables\":\"{\\n\\t\\\"startDate\\\": \\\"2024-08-05\\\",\\n\\t\\\"datapoints\\\": [\\n\\t\\t{\\n\\t\\t\\t\\\"franchiseId\\\": \\\"\\\",\\n  \\\"date\\\": \\\"2024-08-05\\\",\\n  \\\"genericId\\\": \\\"\\\",\\n  \\\"styleName\\\": \\\"\\\",\\n  \\\"sellingPerson\\\": \\\"\\\",\\n  \\\"landingPrice\\\":0.0,\\n  \\\"originalUnitPrice\\\":0.0,\\n  \\\"currentUnitPrice\\\":0.0,\\n  \\\"receptionWH\\\":\\\"\\\",\\n  \\\"receptionStore\\\":\\\"\\\",\\n  \\\"totalUnitsSTD\\\":0,\\n  \\\"totalUnitsLTM\\\":0,\\n  \\\"onHandStore\\\": 0,\\n  \\\"onHandWH\\\": 0,\\n  \\\"salesQty\\\": 0,\\n  \\\"salesAmount\\\": 0.0,\\n  \\\"currency\\\": \\\"\\\",\\n  \\\"bmTotalQty\\\":1,\\n  \\\"ecomTotalQty\\\": 1\\n\\t\\t}\\n\\t]\\n}\"}"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json",
+                    "id": "pair_e7df2cc76d3b46feb8e6d110588bb6ca"
+                },
+                {
+                    "id": "pair_e7de7b5148c64616966488ab37e7de81",
+                    "name": "Authorization",
+                    "value": "{{ _.cognito_token }}",
+                    "description": ""
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1685392249503.5,
+            "isPrivate": false,
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "env_b38974ba233445b9904fa18801e168f3",
+            "parentId": "wrk_11af486746e944c1a421c832dffcc728",
+            "modified": 1685560857321,
+            "created": 1685560823304,
+            "name": "Base Environment",
+            "data": {},
+            "dataPropertyOrder": {},
+            "color": null,
+            "isPrivate": false,
+            "metaSortKey": 1685560823304,
+            "_type": "environment"
+        },
+        {
+            "_id": "jar_3d0fce177d3440a4b4205431e212bb38",
+            "parentId": "wrk_11af486746e944c1a421c832dffcc728",
+            "modified": 1685733812310,
+            "created": 1685560823312,
+            "name": "Default Jar",
+            "cookies": [
+                {
+                    "key": "XSRF-TOKEN",
+                    "value": "4cef95ce-ffb0-4424-97bb-13e8e944444a",
+                    "domain": "agi-sales-dev.auth.ca-central-1.amazoncognito.com",
+                    "path": "/",
+                    "secure": true,
+                    "httpOnly": true,
+                    "extensions": [
+                        "SameSite=Lax"
+                    ],
+                    "hostOnly": true,
+                    "creation": "2023-05-31T20:34:15.432Z",
+                    "lastAccessed": "2023-05-31T20:34:15.432Z",
+                    "id": "9601280258367357"
+                },
+                {
+                    "key": "XSRF-TOKEN",
+                    "value": "ef68f293-3366-4d62-b5cf-44a7abd16102",
+                    "domain": "agi-sales-dev.auth.us-east-1.amazoncognito.com",
+                    "path": "/",
+                    "secure": true,
+                    "httpOnly": true,
+                    "extensions": [
+                        "SameSite=Lax"
+                    ],
+                    "hostOnly": true,
+                    "creation": "2023-06-02T19:23:32.310Z",
+                    "lastAccessed": "2023-06-02T19:23:32.310Z",
+                    "id": "5098882616992619"
+                }
+            ],
+            "_type": "cookie_jar"
+        },
+        {
+            "_id": "env_802979c2a5254bc981dbacb91ee1d23e",
+            "parentId": "env_b38974ba233445b9904fa18801e168f3",
+            "modified": 1722884585610,
+            "created": 1685560851762,
+            "name": "Dev",
+            "data": {
+                "api_url": "https://7q4nksncmzbxboh52rllpaesbi.appsync-api.us-east-1.amazonaws.com/graphql",
+                "cognito_url": "https://agi-sales-dev.auth.us-east-1.amazoncognito.com",
+                "cognito_client_id": "27ml74ksnuor10h046uvi16tdn",
+                "cognito_test_account": "",
+                "cognito_test_account_pwd": "",
+                "cognito_token": "{% response 'body', 'req_a03f268b108049eba44de99466860435', 'b64::JC5BdXRoZW50aWNhdGlvblJlc3VsdC5JZFRva2Vu::46b', 'no-history', 60 %}"
+            },
+            "dataPropertyOrder": {
+                "&": [
+                    "api_url",
+                    "cognito_url",
+                    "cognito_client_id",
+                    "cognito_test_account",
+                    "cognito_test_account_pwd",
+                    "cognito_token"
+                ]
+            },
+            "color": null,
+            "isPrivate": false,
+            "metaSortKey": 1685560851762,
+            "_type": "environment"
+        }
+    ]
+}
