@@ -3,6 +3,9 @@
 # Learn more about .gitignore:
 #     https://www.atlassian.com/git/tutorials/saving-changes/gitignore
 
+#temporary files to hold helper info
+temp/
+
 # Node artifact files
 node_modules/
 dist/
