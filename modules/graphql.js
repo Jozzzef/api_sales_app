@@ -1,4 +1,3 @@
-
 export const mutation_sales = `
 mutation submitSales(
     $startDate: AWSDate!

@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import {authenticateUser} from "./auth.js"
+import {mutation_sales, dummy_sales_variables} from "./graphql.js"
 
 // Load environment variables from .env file
 dotenv.config({ path: "../.env" });
