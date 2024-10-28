@@ -6,6 +6,9 @@
 #temporary files to hold helper info
 #temp/
 
+#env
+.env
+
 # Node artifact files
 node_modules/
 dist/

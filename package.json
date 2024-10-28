@@ -1,0 +1,26 @@
+{
+  "name": "api_sales_app",
+  "version": "1.0.0",
+  "description": "insert description here",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "test": "node ./tests/unit_tests.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Jozzzef/api_sales_app.git"
+  },
+  "keywords": [
+    "AGI"
+  ],
+  "author": "Jozef Lumaj",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/Jozzzef/api_sales_app/issues"
+  },
+  "homepage": "https://github.com/Jozzzef/api_sales_app#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
+}
