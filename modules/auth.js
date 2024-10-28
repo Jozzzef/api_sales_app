@@ -81,16 +81,28 @@ export async function testToken(apiUrl, token_access) {
 
 
 export async function authenticateUser(username, password, cognitoUrl, cognitoClientId, authFlow, apiUrl) {
+    
     //if token saved is still valid
     //need only the access token for now. Need to do cognito research to see how can use the ID and refresh tokens appropriately
     let token_object = enc.loadTokensFromFile();
-    let token = token_object[username]['access']
-    let does_token_work = await testToken(apiUrl, token);
+    
+    //if enc file not created yet
+    if (token_object == null) {
+        receiveToken(username, password, cognitoUrl, cognitoClientId, authFlow);
+        let token_object = enc.loadTokensFromFile();
+        return token_object[username]['access'];
+    }
+
+    //if created
+    let does_token_work = await testToken(apiUrl, token_object[username]['access']);
 
     //if token is invalid or if no token available
     if (!does_token_work) {
-        token = receiveToken(username, password, cognitoUrl, cognitoClientId, authFlow);
+        receiveToken(username, password, cognitoUrl, cognitoClientId, authFlow);
+        let token_object = enc.loadTokensFromFile();
+        return token_object[username]['access'];
     }
 
-    return token
+    //else, i.e. the token is good
+    return token_object[username]['access'];
 }

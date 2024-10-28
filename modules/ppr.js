@@ -10,6 +10,6 @@ const cognitoClientId = process.env.COGNITO_CLIENT_ID;
 const authFlow = process.env.AUTH_FLOW;
 
 
-export function ppr() {
-    
+export async function ppr(dates, file, username, password) {
+    const auth_token = await authenticateUser(username, password, cognitoUrl, cognitoClientId, authFlow, apiUrl);
 }

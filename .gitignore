@@ -9,6 +9,9 @@
 #env
 .env
 
+#tokens
+.tokens.enc
+
 # Node artifact files
 node_modules/
 dist/

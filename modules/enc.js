@@ -35,7 +35,7 @@ export function decrypt(text) {
 
 // READING & WRITING SAVED ENCRYPTED DATA
 // Path to the file where tokens will be stored
-export const TOKEN_FILE_PATH = path.join(__dirname, 'tokens.enc');
+export const TOKEN_FILE_PATH = path.join(__dirname, '../.tokens.enc');
 
 // save tokens to a file
 // json it accepts as parameter is in the form {username:{access:token_jwt, id:token_jwt, refresh:token_jwt}}
