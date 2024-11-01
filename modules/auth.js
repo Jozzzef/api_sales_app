@@ -88,8 +88,8 @@ export async function authenticateUser(username, password, cognitoUrl, cognitoCl
     
     //if enc file not created yet
     if (token_object == null) {
-        receiveToken(username, password, cognitoUrl, cognitoClientId, authFlow);
-        let token_object = enc.loadTokensFromFile();
+        await receiveToken(username, password, cognitoUrl, cognitoClientId, authFlow);
+        let token_object = await enc.loadTokensFromFile();
         return token_object[username]['access'];
     }
 
@@ -98,8 +98,8 @@ export async function authenticateUser(username, password, cognitoUrl, cognitoCl
 
     //if token is invalid or if no token available
     if (!does_token_work) {
-        receiveToken(username, password, cognitoUrl, cognitoClientId, authFlow);
-        let token_object = enc.loadTokensFromFile();
+        await receiveToken(username, password, cognitoUrl, cognitoClientId, authFlow);
+        let token_object = await enc.loadTokensFromFile();
         return token_object[username]['access'];
     }
 
