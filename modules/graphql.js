@@ -3,8 +3,7 @@ import csv from 'csv-parser';
 
 //GRAPHQL OBJECTS
 
-export const mutation_sales = `
-mutation submitSales(
+export const mutation_sales = `mutation submitSales(
     $startDate: AWSDate!
     $franchiseId: String!
     $days: Int!
@@ -44,8 +43,7 @@ export const dummy_sales_variables = {
 
 
 
-export const mutation_ppr = `
-mutation submitPPR(
+export const mutation_ppr = `mutation submitPPR(
     $startDate: AWSDate!
     $datapoints: [PPRDatapoint!]!
   ) {

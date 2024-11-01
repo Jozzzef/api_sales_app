@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import {authenticateUser} from "./auth.js";
-import {mutation_sales, sales_mutation_variable_factory} from "./graphql.js";
+import {mutation_sales, sales_mutation_variable_factory, dummy_sales_variables} from "./graphql.js";
 
 // Load environment variables from .env file
 dotenv.config({ path: "../.env" });
@@ -24,11 +24,14 @@ export async function sales(file_path, franchisee_id, username, password) {
             "Content-Type": "application/json",
             'Authorization': `${auth_token}`
           },
-          body: JSON.stringify({query: mutation_sales, variables: graphql_csv_var})
+          body: JSON.stringify({query: mutation_sales, variables: dummy_sales_variables})
         });
         let res = await response.json();
 
-        if (response.ok) {return response;} 
+        if (response.errors) {
+            throw new Exception("Something went wrong when processed by GraphQL: " + response.errors); 
+        }
+        else if (response.ok) {return response;} 
         else {throw new Exception("Something went wrong when calling to API: " + res);}
       } catch (error) {return error;}
 }
