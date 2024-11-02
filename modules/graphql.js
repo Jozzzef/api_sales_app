@@ -104,17 +104,17 @@ export async function salesCsvToJsObjects(csvFilePath) {
       .pipe(csv())
       .on('data', (data) => {
         //task #1 make the datapoints array for graphql mutation
-        let [month, day, year] = data['Date'].trim().split('/').map(Number);
+        let [year, month, day] = data['Date'].trim().split('-').map(Number);
         day = day.toString().length == 1 ? "0"+day.toString() : day;
         month = month.toString().length == 1 ? "0"+month.toString() : month;
         const date_input = `${year}-${month}-${day}`;
         const rowObject = {
           //data type validation is done here
           storeId: Number.isFinite((parseFloat(data['Store'].trim()))) ? data['Store'].trim() : null,
-          //verify in the format mm/dd/yyyy, format inherited from sales app
-          date: /^(0?[1-9]|1[0-2])\/(0?[1-9]|[12][0-9]|3[01])\/\d{4}$/.test(data['Date'].trim()) ? date_input : null,
+          //verify in the format yyyy-mm-dd
+          date: /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/.test(data['Date'].trim()) ? date_input : null,
           salesAmount: Number.isFinite((parseFloat(data['Amount'].trim()))) ? parseFloat(data['Amount'].trim()) : null,
-          currency: /^[a-zA-Z]{3}$/.test(data['Currency'].trim()) ? data['Currency'].trim() : null,
+          currency: /^[A-Z]{3}$/.test(data['Currency'].trim()) ? data['Currency'].trim() : null,
         };
         // Check if any value in rowObject is null
         if (Object.values(rowObject).includes(null)) {
