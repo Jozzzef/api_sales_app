@@ -104,8 +104,10 @@ export async function salesCsvToJsObjects(csvFilePath) {
       .pipe(csv())
       .on('data', (data) => {
         //task #1 make the datapoints array for graphql mutation
-        const [month, day, year] = data['Date'].trim().split('/').map(Number);
-        const date_input = `${year}-${month}-${day}`
+        let [month, day, year] = data['Date'].trim().split('/').map(Number);
+        day = day.toString().length == 1 ? "0"+day.toString() : day;
+        month = month.toString().length == 1 ? "0"+month.toString() : month;
+        const date_input = `${year}-${month}-${day}`;
         const rowObject = {
           //data type validation is done here
           storeId: Number.isFinite((parseFloat(data['Store'].trim()))) ? data['Store'].trim() : null,
@@ -145,7 +147,7 @@ export async function salesCsvToJsObjects(csvFilePath) {
 }
 
 
-export async function sales_mutation_variable_factory(csv_path, franchiseId = "1234") {
+export async function sales_mutation_variable_factory(csv_path, franchiseId) {
 	
   let [datapoints_array, earliest_date_i, num_days] = await salesCsvToJsObjects(csv_path);
 

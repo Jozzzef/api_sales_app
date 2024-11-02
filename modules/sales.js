@@ -29,6 +29,10 @@ async function sales_endpoint_call(auth_token, mut_variables) {
         JSON.stringify(data.errors), 
         JSON.stringify(data.data)); 
     }
+    else if (data.data.submitSales.errors) {
+      throw new Error("Something went wrong when data was processed by GraphQL: " + 
+        JSON.stringify(data.data.submitSales.errors))
+    }
     else if (response.ok) {
       return data;
     } 
