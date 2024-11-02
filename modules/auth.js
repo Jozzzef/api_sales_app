@@ -58,23 +58,24 @@ export async function testToken(apiUrl, token_access) {
             'Authorization': `${token_access}`
           },
           //send dummy graphql, we only care if it gives us an ok response
-          body: JSON.stringify({query: mutation_sales, variables: dummy_sales_variables})
+          body: JSON.stringify({query: mutation_sales, operationName:"submitSales", variables: dummy_sales_variables})
         });
-        let res = await response.json();
+        let data = await response.json();
 
         if (response.status == 401) {
             //401 specifically is the unauthorized error, which is the exact one we need to know it's our tokens that are the problem
             return false;
         }
         else if (response.ok) {
+            //console.log(data)
             return true;
         } 
         else {
-            throw new Exception("response edge case detected: " + res);
+            throw new Error("response edge case detected: " + response);
         }
 
       } catch (error) {
-        console.log(error);
+        console.log(data);
         return false;
     }
 }
