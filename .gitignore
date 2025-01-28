@@ -8,9 +8,13 @@
 
 #env
 .env
+.env_exposed
 
 #tokens
 .tokens.enc
+
+#temp for dev
+/temp
 
 # Node artifact files
 node_modules/
