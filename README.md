@@ -44,6 +44,25 @@ EOF
 # see example below for more on this
 ```
 ##### Windows Easy Install
+- Save the below as install_api.bat (naming is arbitrary as long as .bat) and run as administrator.
+```batch
+@echo off
+
+:: Step 1: Install Node.js
+echo Installing Node.js...
+winget install OpenJS.NodeJS.LTS
+
+:: Step 2: Install api-sales-app
+set /p path_to_lib="Enter the path where you downloaded api_sales_app: "
+call npm install -g %path_to_lib%
+
+:: Step 3: Setup environment variables
+echo Setting up environment variables...
+node -e "const api = require('api_sales_app'); api.set_env_var({mode: 'interactive'});"
+
+echo Installation complete. Check the .env file in your working directory.
+```
+
 
 ##### Example Usage
 ```javascript
