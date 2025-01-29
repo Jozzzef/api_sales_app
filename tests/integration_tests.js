@@ -7,8 +7,8 @@ import {upload} from "../main.js"
 //for testing ; these env variables are only in the dev environment
 dotenv.config({ path: __dirname+"/../.env" });
 const secret_key = process.env.SECRET_KEY; 
-const username = process.env.COGNITO_TEST_ACCOUNT;
-const password = process.env.COGNITO_TEST_ACCOUNT_PWD;
+const username = process.env.COGNITO_ACCOUNT;
+const password = process.env.COGNITO_ACCOUNT_PWD;
 const franID = process.env.FRAN_ID;
 const filep = '/home/jozeflumaj/Desktop/api_sales_app/temp/sales_2024-02-04_1000588.csv'
 

@@ -12,17 +12,17 @@ The following is a bash script that works as:
 2. a script you can pick and choose parts of to set up the environment
 3. a general walkthrough on how you can manually perform the setup yourself
 
+##### Fedora Easy Install
 ```bash
 # Step 1: Install Dependencies
 
-# dependencies:
-#    nodejs >= 20.18.1
-#    csv-parser: >= 3.0.0
-#    dotenv: >= 16.4.5
-
+# nodejs >= 20.18.1
+sudo dnf module enable nodejs:20 -y # v20 is the stream of the package we want
+sudo dnf install nodejs -y
 
 # Step 2: Install the api-sales-app library with npm
-
+read -p "Enter the path where you downloaded api_sales_app: " path_to_lib
+npm install -g path_to_lib #this will install other dependencies as well
 
 # Step 3: Setup up environment variables
 # this creates an environment variable file (.env) in the relative location where the library
@@ -30,14 +30,24 @@ The following is a bash script that works as:
 # It needs the following parameters:
     # ENCRYPTION_KEY: This is provided by Aldo Group to the partner  
     # SECRET_KEY: This is provided by Aldo Group to the partner 
-    # COGNITO_TEST_ACCOUNT= This is the email you use to access the sales application in the browser
-    # COGNITO_TEST_ACCOUNT_PWD= This is the password you use to access the sales application in the browser
+    # COGNITO_ACCOUNT= This is the email you use to access the sales application in the browser
+    # COGNITO_ACCOUNT_PWD= This is the password you use to access the sales application in the browser
     # FRAN_ID = This is the franchise code you use in the dropdown when uploading the sales.
         # Therefore if you have multiple accounts (e.g. both ALDO and CIS), 
-            # you will need multiple scripts OR use the set_env_var() func within your script
+            # you will need to use the set_env_var(mode="change_FRAN_ID") func within your script
+node << EOF
+const api = require('api_sales_app')
+api.set_env_var(mode="interactive")
+EOF
 
 Step 4: Use in your application
 # see example below for more on this
+```
+##### Windows Easy Install
+
+##### Example Usage
+```javascript
+const api = require("api_sales_app");
 ```
 
 please contact jlumaj@aldogroup.com for more information about this repo
