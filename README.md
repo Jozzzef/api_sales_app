@@ -1,4 +1,4 @@
-# README
+# API FOR SALES / PPR APP 
 
 ### What is this repository for?
 - This is an api that exposes the sales/ppr application functionality of uploading data from our partners.
@@ -40,7 +40,7 @@ const api = require('api_sales_app')
 api.set_env_var(mode="interactive")
 EOF
 
-Step 4: Use in your application
+# Step 4: Use in your application
 # see example below for more on this
 ```
 ##### Windows Easy Install
