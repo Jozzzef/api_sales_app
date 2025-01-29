@@ -105,8 +105,8 @@ const files = [ '/path/to/files/sales_upload_for_199999.csv',
 
 for (let i= 0; i < franchisee_ids.length; i++){
     api.set_single_env_var("FRAN_ID", franchisee_ids[i])
-    franID = process.env.FRAN_ID;
     api.load_env_vars();
+    franID = process.env.FRAN_ID;
     let response = await api.upload("sales", files[i], franID, username, password, secret_key);
     console.log(response);
 }
