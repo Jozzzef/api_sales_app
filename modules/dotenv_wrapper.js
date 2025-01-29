@@ -1,7 +1,8 @@
 import dotenv from 'dotenv';
 import fs from 'fs';
+const __dirname = import.meta.dirname;
 
-export function load_env_vars(location) {
+export function load_env_vars(location=__dirname+"./.env") {
     dotenv.config({ path: location })
 }
 

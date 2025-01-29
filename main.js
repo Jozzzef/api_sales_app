@@ -15,7 +15,19 @@ export async function upload(type=struct_upload_types[0],
     //call specific function expressed in type 
     switch (type) {
         case struct_upload_types[0]:  
-            return await sales(file_path, franchisee_id, username, password, secret_key);
+            let res = await sales(file_path, franchisee_id, username, password, secret_key);
+            if (res.status) {
+                throw new Error("status: Uncaught error in uploading; please check graphql endpoint")
+            } else if (res.data.submitSales.status) {
+                console.log("Status:", res.data.submitSales.status);
+                return res.data.submitSales.status
+            } 
+            if (res.error) {
+                throw new Error(res.error)
+            } else if (res.data.submitSales.error) {
+                    throw new Error("status: Uncaught error in uploading; please check graphql endpoint")
+            }
+            return res
         case struct_upload_types[1]:
             return await ppr(file_path, franchisee_id, username, password, secret_key);
     }

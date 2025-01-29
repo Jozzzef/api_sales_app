@@ -60,13 +60,57 @@ call npm install -g %path_to_lib%
 echo Setting up environment variables...
 node -e "const api = require('api_sales_app'); api.set_env_var({mode: 'interactive'});"
 
-echo Installation complete. Check the .env file in your working directory.
+echo completed setup
 ```
 
 
-##### Example Usage
+### Example Usage (Sales Upload With One Account/Banner)
+```javascript
+// Example of how to use the Sales upload() functionality
+const api = require("api_sales_app");
+
+// Load environment variables from .env file
+//for testing ; these env variables are only in the dev environment
+api.load_env_vars();
+const secret_key = process.env.SECRET_KEY; 
+const username = process.env.COGNITO_ACCOUNT;
+const password = process.env.COGNITO_ACCOUNT_PWD;
+const franID = process.env.FRAN_ID;
+const file = '/path/to/files/sales_upload_for_199999.csv'
+
+const async_wrapper = async () => { //the async wrapper is optional but good for debugging 
+    let response = await api.upload("sales", file, franID, username, password, secret_key);
+    console.log(response);
+}
+async_wrapper();
+```
+
+#### Example #2 (Sales Upload With Many Accounts)
+- the below shows how you can simply use for loops while changing the env variables to do many uploads at once
 ```javascript
 const api = require("api_sales_app");
+
+// Load environment variables from .env file
+//for testing ; these env variables are only in the dev environment
+load_env_vars();
+const secret_key = process.env.SECRET_KEY; 
+const username = process.env.COGNITO_ACCOUNT;
+const password = process.env.COGNITO_ACCOUNT_PWD;
+
+let franID 
+franchisee_ids = ["199999", "188888", "177777"] //dummy numbers (in string format)
+const files = [ '/path/to/files/sales_upload_for_199999.csv',
+                '/path/to/files/sales_upload_for_188888.csv',
+                '/path/to/files/sales_upload_for_177777.csv' ]
+
+for (let i= 0; i < franchisee_ids.length; i++){
+    api.set_single_env_var("FRAN_ID", franchisee_ids[i])
+    franID = process.env.FRAN_ID;
+    api.load_env_vars();
+    let response = await api.upload("sales", files[i], franID, username, password, secret_key);
+    console.log(response);
+}
+
 ```
 
 please contact jlumaj@aldogroup.com for more information about this repo
