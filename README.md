@@ -8,7 +8,7 @@
 ##### Easy Install:
 
 The following is a bash script that works as:
-1. a script for you to copy and paste and execute whever in your environment you please
+1. a script to copy and paste and execute wherever in your environment
 2. a script you can pick and choose parts of to set up the environment
 3. a general walkthrough on how you can manually perform the setup yourself
 
