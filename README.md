@@ -98,7 +98,7 @@ const username = process.env.COGNITO_ACCOUNT;
 const password = process.env.COGNITO_ACCOUNT_PWD;
 
 let franID 
-franchisee_ids = ["199999", "188888", "177777"] //dummy numbers (in string format)
+const franchisee_ids = ["199999", "188888", "177777"] //dummy numbers (in string format)
 const files = [ '/path/to/files/sales_upload_for_199999.csv',
                 '/path/to/files/sales_upload_for_188888.csv',
                 '/path/to/files/sales_upload_for_177777.csv' ]
