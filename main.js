@@ -6,6 +6,13 @@ import { set_single_env_var } from "./modules/dotenv_wrapper.js";
 
 let struct_upload_types = ["sales", "ppr"]
 
+
+/**
+ * The main entry point, a single function for both the main use cases
+ * there are currently two possible values for the type param: "sales" & "ppr"
+ * ppr is still currently under development
+ * the upload fucntionality takes a csv file on your end and uploads it to the AGI sales app
+ */
 export async function upload(type=struct_upload_types[0], 
                             file_path, 
                             franchisee_id, 
